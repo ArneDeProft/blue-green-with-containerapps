@@ -43,11 +43,11 @@ jobs:
 
     - name: Push images
       run: |
-        BACKEND_IMAGE_ID=ghcr.io/${{ github.repository_owner }}/container-apps/$BACKEND_APP_NAME
+        BACKEND_IMAGE_ID=ghcr.io/${{ github.repository_owner.lowercase }}/container-apps/$BACKEND_APP_NAME
         docker tag $BACKEND_APP_NAME $BACKEND_IMAGE_ID:${GITHUB_RUN_ID}
         docker push $BACKEND_IMAGE_ID:${GITHUB_RUN_ID}
 
-        FRONTEND_IMAGE_ID=ghcr.io/${{ github.repository_owner }}/container-apps/$FRONTEND_APP_NAME
+        FRONTEND_IMAGE_ID=ghcr.io/${{ github.repository_owner.lowercase }}/container-apps/$FRONTEND_APP_NAME
         docker tag $FRONTEND_APP_NAME $FRONTEND_IMAGE_ID:${GITHUB_RUN_ID}
         docker push $FRONTEND_IMAGE_ID:${GITHUB_RUN_ID}
 
@@ -70,5 +70,5 @@ jobs:
         cd $GITHUB_WORKSPACE/scripts
         ls -l 
         chmod +x ./deploy.sh
-        ./deploy.sh ${{ secrets.RESOURCE_GROUP }} ${GITHUB_RUN_ID} "ghcr.io/${{ github.repository_owner }}/container-apps"
+        ./deploy.sh ${{ secrets.RESOURCE_GROUP }} ${GITHUB_RUN_ID} "ghcr.io/${{ github.repository_owner.lowercase }}/container-apps"
       shell: bash
