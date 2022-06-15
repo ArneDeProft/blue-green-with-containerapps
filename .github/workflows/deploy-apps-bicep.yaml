@@ -32,4 +32,4 @@ jobs:
         az deployment group create -g ${{ secrets.RESOURCE_GROUP }} -f ./deploy/apps.bicep \
           -p explorerImageTag=$VERSION \
           -p calculatorImageTag=$VERSION \
-          -p containerRegistryOwner=${{ github.repository_owner }}
+          -p containerRegistryOwner=${{ github.repository_owner }}.toLowerCase()
